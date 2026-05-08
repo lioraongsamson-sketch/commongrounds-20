@@ -87,7 +87,7 @@ class BookDetailView(DetailView):
                     Bookmark.objects.create(
                         book=book,
                         profile=self.request.user.profile,
-                        date_bookmarked=timezone.now(),
+                        date_bookmarked=timezone.now().date(),
                     )
                 return redirect("bookclub:book_detail", pk=book.pk)
 

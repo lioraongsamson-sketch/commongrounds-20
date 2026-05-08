@@ -4,7 +4,6 @@
     <h3>Book Club</h3>
 
     {% if user.is_authenticated %}
-    <!-- and has book contributor role -->
     <a href="{% url 'bookclub:book_create' %}">Contribute a Book</a>
 
         <h4>Books Contributed</h4>
@@ -53,6 +52,8 @@
                     {{ books.title }}
                 </a>
             </li>
+            {% empty %}
+            <i>This shelf is currently desolate.</i>
         {% endfor %}
     </ul>
 {% endblock %}
