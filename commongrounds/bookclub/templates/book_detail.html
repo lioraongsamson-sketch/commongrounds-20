@@ -21,7 +21,11 @@
     {% endif %}
     
     {% if book.available_to_borrow %}
-        <a href="{% url 'bookclub:book_borrow' book.pk %}" class="detail">Borrow this book</a>
+    <div class="detail">
+        <button type="button" class="side-button" class="side-button">
+            <a href="{% url 'bookclub:book_borrow' book.pk %}" class="detail">Borrow this book</a>
+        </button>
+    </div>
     {% endif %}
     
     <p class="detail"><b>{% if bookmark_count == 0 %}No Bookmarks
@@ -29,7 +33,7 @@
           {% else %}{{ bookmark_count }} Bookmarks{% endif %}</b></p>
     {% if user.is_authenticated %}
         <form method="POST" class="detail">
-            <button type="submit" name="to_bookmark" value="bookmark">
+            <button type="submit" name="to_bookmark" value="bookmark" class="side-button">
                 {% csrf_token %}
                 {% if bookmarked %}Bookmarked
                 {% else %}Bookmark
