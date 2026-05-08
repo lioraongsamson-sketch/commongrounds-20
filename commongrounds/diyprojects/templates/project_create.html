@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block content %}
-    <h1>DIY Projects</h1>
-    <h3>Create New Project</h3>
+    <h1 class="app_head">DIY Projects</h1>
+    <h2 class="app_head">Create New Project</h2>
 
+    <div class="form">
     <form method="post">
         {% csrf_token %}
 
@@ -46,4 +46,5 @@
 
         <button type="submit">Create Project</button>
     </form>
+    </div>
 {% endblock %}

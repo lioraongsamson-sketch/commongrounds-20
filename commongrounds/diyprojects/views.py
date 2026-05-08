@@ -117,5 +117,12 @@ class ProjectUpdateView(RoleRequiredMixin, UpdateView):
 
     required_role = "Project Creator"
 
-    def get_queryset(self):
-        return Project.objects.filter(creator=self.request.user.profile)
+    def form_valid(self, form):
+        project = form.save(commit=False)
+        project.save()
+        return redirect('diyprojects:project_detail', pk=project.pk)
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs

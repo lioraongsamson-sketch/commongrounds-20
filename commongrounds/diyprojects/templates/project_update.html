@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>DIY Projects</h1>
-    <h3>Edit Project</h3>
+{% load static %}
 
+{% block content %}
+    <h1 class="app_head">DIY Projects</h1>
+    <h2 class="app_head">Edit Project</h2>
+
+    <div class="form">
     <form method="post">
         {% csrf_token %}
 
         <p>
             <label>Title:</label><br>
             {{ form.title }}
+        </p>
+
+        <p>
+            <label>Creator:</label><br>
+            {{ form.creator }}
         </p>
 
         <p>
@@ -38,9 +46,12 @@
         </p>
 
         <button type="submit">Update Project</button>
+        <button type="button">
+            <a href="{% url 'diyprojects:project_detail' object.pk %}"> Cancel </a>
+        </button>
     </form>
+    </div>
 
-    <br>
-    <a href="{% url 'diyprojects:project_detail' object.pk %}">Cancel</a>
+    
 
 {% endblock %}

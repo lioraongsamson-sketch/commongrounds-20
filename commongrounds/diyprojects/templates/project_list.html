@@ -3,12 +3,11 @@
 {% load static %}
 
 {% block content %}
-    <h1>DIY Projects</h1>
+    <h1 class="app_head">DIY Projects</h1>
+    <p> <a class="create" href="{% url 'diyprojects:project_create' %}"> Create Project </a> </p>
     {% if user.is_authenticated %}
-    <p> <a href="{% url 'diyprojects:project_create' %}"> Create Project </a> </p>
-
-        <h4>Projects Created</h4>
-        <ul>
+        <h3 class="subhead">Projects Created</h3>
+        <ul class="items">
             {% for project in created_projects %}
             <li>
                 <a href = "{{ project.get_absolute_url }}">
@@ -19,8 +18,9 @@
                 <p><i>No projects created yet.</i></p>
             {% endfor %}
         </ul>
-    <h4>My Bookmarks</h4>
-    <ul>
+
+    <h3 class="subhead">My Bookmarks</h3>
+    <ul class="items">
         {% for project in favorited_projects %}
             <li>
                 <a href = "{{ project.get_absolute_url }}">
@@ -31,8 +31,9 @@
                 <p><i>No favorite projects yet.</i></p>
         {% endfor %}
     </ul>
-    <h4>My Reviews</h4>
-    <ul>
+
+    <h3 class="subhead">My Reviews</h3>
+    <ul class="items">
         {% for project in reviewed_projects %}
             <li>
                 <a href = "{{ project.get_absolute_url }}">
@@ -45,8 +46,8 @@
     </ul>
     {% endif %} 
     
-    <h4>All Projects</h4>
-    <ul>
+    <h3 class="subhead">All Projects</h3>
+    <ul class="items">
         {% for project in all_projects %}
             <li>
                 <a href = "{{ project.get_absolute_url }}">
