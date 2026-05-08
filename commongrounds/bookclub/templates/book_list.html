@@ -3,9 +3,9 @@
 {% block content %}
     <h1 class="app_head">Book Club</h1>
 
-    {% if user.is_authenticated %}
     <a href="{% url 'bookclub:book_create' %}" class="detail">Contribute a Book</a>
 
+    {% if user.is_authenticated %}
         <h2 class="subhead">Books Contributed</h2>
         <ul class="items">
             {% for books in contributed_books %}
