@@ -4,11 +4,12 @@ from django.shortcuts import redirect
 
 class RoleRequiredMixin(LoginRequiredMixin):
     required_role = None
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated or not self.has_required_role(request.user):
             return redirect("/accounts/login/")
         return super().dispatch(request, *args, **kwargs)
-    
+
     def has_required_role(self, user):
         if not self.required_role:
             return True
@@ -16,3 +17,11 @@ class RoleRequiredMixin(LoginRequiredMixin):
             return user.profile.role == self.required_role
         except AttributeError:
             return False
+
+
+class LocalEventsNotLoggedInMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('localevents:event_list')
+
+        return super().dispatch(request, *args, **kwargs)

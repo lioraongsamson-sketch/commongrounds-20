@@ -24,6 +24,8 @@
 
     {% if request.user.profile in event.organizer.all %}
         <a href="{% url 'localevents:event_update' event.pk %}">Update Event</a>
+    {% elif event in signed_up_events %}
+        <button disabled>Signed Up Successfully</button>
     {% elif event.status == "Full" %}
         <button disabled>Full Slots!</button>
     {% else %}

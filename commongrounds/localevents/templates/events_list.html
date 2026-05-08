@@ -10,28 +10,32 @@
     {% if user.is_authenticated %} <!-- Removed the "and product_user" -->
         <h3>Events Created</h3>
         <ul>
-            {% for event in events_user %} 
+            {% for event in created_events %} 
             <li>
-                <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                <a href="{{ event.get_absolute_url }}">{{ event.title }} | {{ event.status }}</a>
             </li>
+            {% empty %}
+                <li>You have not created any events.</li>
             {% endfor %}
         </ul>
         <h3>Events Signed Up</h3>
         <ul>
-            {% for event in events_user %} 
+            {% for event in signed_up_events %} 
             <li>
-                <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                <a href="{{ event.get_absolute_url }}">{{ event.title }} | {{ event.status }}</a>
             </li>
+            {% empty %}
+                <li>You have not signed up for any events.</li>
             {% endfor %}
         </ul>
     {% endif %}
     
     <h3>Local Events List</h3>
-    {% for event in event_list %}
+    {% for event in all_events %}
     <ul>
         <li>
             <a href = "{{ event.get_absolute_url }}">
-                {{ event.title }}
+                {{ event.title }} | {{ event.status }}
             </a>
         </li>
     </ul>

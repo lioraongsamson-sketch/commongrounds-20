@@ -71,8 +71,6 @@ class EventSignup(models.Model):
     event = models.ForeignKey(
         Event,
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
         related_name='event_signup'  # Recheck how to properly name this
     )
 
