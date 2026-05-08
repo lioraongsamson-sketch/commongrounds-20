@@ -151,6 +151,10 @@ body {
     padding: 5px;
 }
 
+.merchstore-padding{
+    padding: 0px 10px;
+}
+
 h1 a {
     text-decoration: none;
 }
