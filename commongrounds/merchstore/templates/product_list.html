@@ -1,12 +1,38 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h3>Merchandise Store</h3>
-    <h5>Product List</h5>
-    {% for product in product_list %}
-    <li>
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-    </li>
+    <h1 class="app_head">Merchandise Store</h1>
+    <h2 class="app_head">Product List</h2>
+    
+    <div class="list">
+        <a href="{% url 'merchstore:product_create' %}" class="merchstore-padding">Add a New Product</a>
+        <a href="{% url 'merchstore:cart_view' %}" class="merchstore-padding">View Your Shopping Cart</a>
+        <a href="{% url 'merchstore:transaction_list' %}" class="merchstore-padding">View Your Transaction List</a>
+    </div>
 
-{% endfor %}
+
+    {% if user.is_authenticated and products_user %}
+    <h4 class="subhead">Your Products</h4>
+    <ul class="items">
+        {% for product in products_user %}
+        <li>
+            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h4 class="subhead">All Products</h4>
+    <ul class="items">
+        {% for product in products_all %}
+            <li>
+                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                <p>Seller: {{ product.owner }}</p>
+            </li>
+        {% empty %}
+            <li>No products avaliable</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

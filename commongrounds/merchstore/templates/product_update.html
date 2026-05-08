@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 class="app_head">Merchandise Store</h1>
+    <h2 class="app_head">Update Product: {{ product.name }}</h2>
+
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+
+            <br>
+            <button type="submit" name="submit" class="side-button">Save Updates</button>
+            <a href="{{ product.get_absolute.url }}">Cancel</a>
+        </form>
+    </div>
+
+    <br>
+    <br>
+
+    <h2 class="app_head">Current Product Info</h2>
+    <div style="text-align: center;">
+        <img src="{{ product.product_image.url }}" width="30%" height="30%">
+    </div>
+    <div style="display:flex; justify-content: center;">
+        <ul style="text-align: left;">
+            <li>Description: {{ product.description }}</li>
+            <li>Product Type: {{ product.product_type }}</li>
+            <li>Owner: {{ product.owner }}</li>
+            <li>Price: {{ product.price }}</li>
+            <li>Stock: {{ product.stock }}</li>
+            <li>Status: {{ product.status }}</li>
+        </ul>
+    </div>
+
+    <a href="{% url 'merchstore:product_detail' product.pk %}" style="display: block; text-align: center;">Go Back</a>
+{% endblock %}
