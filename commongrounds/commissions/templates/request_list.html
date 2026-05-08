@@ -1,14 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>Commission Requests</h1>
-    <h2>Commission List</h2>
-    <ul>
-        {% for commission in commission_list %} 
+    <h1 class="app_head">Commission Requests</h1>
+    <a class="create" href="{% url 'commissions:request_create' %}"><p>Create a commission</p></a>
+
+    {% if user.is_authenticated %}
+        <h3 class="subhead">Created Commissions</h3>
+        {% for commission in created_commissions %}
+        <ul class="items">
             <li>
                 <a href="{{ commission.get_absolute_url }}"><b>{{ commission.title }}</b></a>
+                <p>{{ commission.status }}</p>
                 <p>{{ commission.created_on }}</p>
+                <p>{{ commission.maker }}</p>
             </li>
+        </ul>
+        {% empty %}
+            <p class="items">You have not created any commissions.</p>
         {% endfor %}
-    </ul>
-{% endblock %}    
+        
+        <h3 class="subhead">Applied Commissions</h3>
+        {% for commission in applied_commissions %}
+            <ul class="items">
+                <li>
+                    <a href="{{ commission.get_absolute_url }}"><b>{{ commission.title }}</b></a>
+                    <p>{{ commission.status }}</p>
+                    <p>{{ commission.created_on }}</p>
+                    <p>{{ commission.maker }}</p>
+                </li>
+            </ul>
+        {% empty %}
+            <p class="items">You have not applied to any commissions.</p>
+        {% endfor %}
+
+        <h3 class="subhead">Commissions</h3>
+        {% for commission in remaining_commissions %}
+            <ul class="items">
+                <li>
+                    <a href="{{ commission.get_absolute_url }}"><b>{{ commission.title }}</b></a>
+                    <p>{{ commission.status }}</p>
+                    <p>{{ commission.created_on }}</p>
+                    <p>{{ commission.maker }}</p>
+                </li>
+            </ul>
+        {% empty %}
+            <p class="items">There are no listed commissions.</p>
+        {% endfor %}
+
+    {% else %}
+        <h3 class="subhead">All Commissions</h3>
+        {% for commission in all_commissions %}
+            <li class="items">
+                <a href="{{ commission.get_absolute_url }}"><b>{{ commission.title }}</b></a>
+                <p>{{ commission.status }}</p>
+                <p>{{ commission.created_on }}</p>
+                <p>{{ commission.maker }}</p>
+            </li>
+        {% empty %}
+            <p class="items">There are no listed commissions.</p>
+        {% endfor %}
+    {% endif %}
+    
+{% endblock %}  

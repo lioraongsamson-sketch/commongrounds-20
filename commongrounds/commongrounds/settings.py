@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# "commongrounds-f-20-production.up.railway.app"
 
 # Application definition
 
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,7 +86,8 @@ WSGI_APPLICATION = 'commongrounds.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'NAME': BASE_DIR / 'db_sqlite3',
     }
 }
 
@@ -129,5 +130,10 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]

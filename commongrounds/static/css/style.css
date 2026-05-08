@@ -1,0 +1,167 @@
+* {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color:white;
+}
+
+body {
+    background: #b33b69;
+    background: linear-gradient(0deg, rgba(179, 59, 105, 1) 0%, rgba(217, 146, 15, 1) 32%, rgba(124, 81, 133, 1) 65%, rgba(12, 7, 166, 1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.up a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    padding: 0 0 0 0;
+    text-decoration: none;
+    text-align: center;
+}
+
+.ui_button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: 20px;
+    padding: 0 0 0 20px;
+}
+
+.welcome {
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    text-shadow: 5px 5px 0 black;
+    transform: rotate(-3deg);
+    position:relative;
+    top:-20px;
+}
+
+.up {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 40px;
+    padding: 0;
+    text-align: center;
+}
+
+.log {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    position:relative;
+    top:-40px;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.pw {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 1%;
+}
+
+.upper_half {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+.lower_half {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+.app_head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subhead {
+    margin-left: 20%;
+}
+
+.items {
+    margin-left: 20%;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail p {
+    padding: 0 15px 0 0;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+option {
+    color: black;
+}
+
+input, 
+textarea,
+select {
+    background-color: white;
+    color: black;
+}
+
+button {
+    color: black;
+}
+
+#logout {
+    color: white;
+}
