@@ -137,6 +137,20 @@ body {
     padding: 0 15px 0 0;
 }
 
+.side-button {
+    background-color: #6c5ce7;
+    color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3 ease;
+}
+
+.side-button:hover {
+    background-color: #a29bfe;
+    padding: 5px;
+}
+
 h1 a {
     text-decoration: none;
 }

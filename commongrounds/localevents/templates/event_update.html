@@ -2,14 +2,18 @@
 {% load static %}
 
 {% block content %}
-<h2>Update Event: {{ event.title }}</h2>
+    <h2 class="app_head">Update Event: {{ event.title }}</h2>
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <br>
-    <button type="submit" name="submit">Save Updates</button>
-</form>
-<br>
-<a href="{% url 'localevents:event_detail' event.pk %}">Cancel Changes</a>
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <button type="submit" name="submit">Save Updates</button>
+        </form>
+        <br>
+    </div>
+    <div class="detail">
+        <a class="side-button" href="{% url 'localevents:event_detail' event.pk %}">Cancel Changes</a>
+    </div>
 {% endblock %}

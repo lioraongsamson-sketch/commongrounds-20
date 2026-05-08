@@ -3,14 +3,13 @@
 
 {% block content %}
     <h1 class="app_head">Local Events</h1>
+    <h3 class="create"><a href="{% url 'localevents:event_create' %}">Create Event</a></h3>
 
-    <a href="{% url 'localevents:event_create' %}">Create Event</a>
-    <br>
     <br>
 
     {% if user.is_authenticated %} <!-- Removed the "and product_user" -->
-        <h3>Events Created</h3>
-        <ul>
+        <h3 class="app_head">Events Created</h3>
+        <ul class="items">
             {% for event in created_events %} 
             <li>
                 <a href="{{ event.get_absolute_url }}">{{ event.title }} | {{ event.status }}</a>
@@ -19,8 +18,8 @@
                 <li>You have not created any events.</li>
             {% endfor %}
         </ul>
-        <h3>Events Signed Up</h3>
-        <ul>
+        <h3 class="app_head">Events Signed Up</h3>
+        <ul class="items">
             {% for event in signed_up_events %} 
             <li>
                 <a href="{{ event.get_absolute_url }}">{{ event.title }} | {{ event.status }}</a>
@@ -31,9 +30,9 @@
         </ul>
     {% endif %}
     
-    <h3>Local Events List</h3>
+    <h3 class="app_head">Local Events List</h3>
     {% for event in all_events %}
-    <ul>
+    <ul class="items">
         <li>
             <a href = "{{ event.get_absolute_url }}">
                 {{ event.title }} | {{ event.status }}

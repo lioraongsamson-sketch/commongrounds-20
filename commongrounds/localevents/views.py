@@ -65,7 +65,7 @@ class EventDetailView(DetailView):
         return redirect('localevents:event_list')
 
 
-class EventSignupView(CreateView):  # LocalEventsNotLoggedInMixin,
+class EventSignupView(CreateView):
     model = EventSignup
     form_class = EventSignupForm
     template_name = "event_signup.html"
