@@ -47,7 +47,8 @@ class BookReview(models.Model):
         "accounts.Profile", on_delete=models.CASCADE, blank=True, null=True
     )
     anon_reviewer = models.TextField(blank=True, null=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
+    book = models.ForeignKey(
+        Book, on_delete=models.CASCADE, related_name="reviews")
     title = models.CharField(blank=False)
     comment = models.TextField(blank=False)
 

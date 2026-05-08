@@ -2,25 +2,25 @@
 {% load static %}
 
 {% block content %}
-<html>
-    <head>
-        <title>New Product</title>
-    </head>
-    <body>
-        <h1 class="app_head">Merchandise Store</h1>
-        <h2 class="app_head">Add a Product</h2>
-        <div class="form">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form }}
-                
-                <br>
-                <button type="submit" class="side-button">Save Form</button>
-            </form>
-        </div>
-        
-        <br>
-        <a href="{% url 'merchstore:product_list' %}" style="display: block; text-align: center;">Go Back</a>
-    </body>
-</html>
+    <html>
+        <head>
+            <title>New Product</title>
+        </head>
+        <body>
+            <h1 class="app_head">Merchandise Store</h1>
+            <h2 class="app_head">Add a Product</h2>
+            <div class="form">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    
+                    <br>
+                    <button type="submit" class="side-button">Save Form</button>
+                </form>
+            </div>
+            
+            <br>
+            <a href="{% url 'merchstore:product_list' %}" style="display: block; text-align: center;">Go Back</a>
+        </body>
+    </html>
 {% endblock %}
