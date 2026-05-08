@@ -4,7 +4,8 @@ from .models import Project, ProjectReview, ProjectRating
 
 
 class ProjectForm(forms.ModelForm):
-    creator = forms.ModelChoiceField(queryset=Profile.objects.all(), required=True)
+    creator = forms.ModelChoiceField(
+        queryset=Profile.objects.all(), required=True)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -14,7 +15,8 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ['title', 'category', 'creator','description', 'materials', 'steps', 'status']
+        fields = ['title', 'category', 'creator',
+                  'description', 'materials', 'steps', 'status']
 
 
 class ReviewForm(forms.ModelForm):

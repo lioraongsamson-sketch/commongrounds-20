@@ -19,16 +19,20 @@ class ProjectListView(ListView):
         if self.request.user.is_authenticated:
             profile = self.request.user.profile
 
-            creations = context['created_projects'] = Project.objects.filter(creator=profile)
-            favorites = context['favorited_projects'] = Project.objects.filter(favorites__profile=profile)
-            reviews = context['reviewed_projects'] = Project.objects.filter(reviews__reviewer=profile)
+            creations = context['created_projects'] = Project.objects.filter(
+                creator=profile)
+            favorites = context['favorited_projects'] = Project.objects.filter(
+                favorites__profile=profile)
+            reviews = context['reviewed_projects'] = Project.objects.filter(
+                reviews__reviewer=profile)
 
             created = [project.pk for project in creations]
             favorited = [project.pk for project in favorites]
             reviewed = [project.pk for project in reviews]
 
             user_projects = created + favorited + reviewed
-            context['all_projects'] = Project.objects.exclude(pk__in=user_projects)
+            context['all_projects'] = Project.objects.exclude(
+                pk__in=user_projects)
         else:
             context['all_projects'] = Project.objects.all()
 
@@ -44,7 +48,8 @@ class ProjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         project = self.get_object()
 
-        context['average_rating'] = project.ratings.aggregate(avg=Avg('score'))['avg']
+        context['average_rating'] = project.ratings.aggregate(avg=Avg('score'))[
+            'avg']
 
         context['reviews'] = project.reviews.all()
         context['favorites_count'] = project.favorites.count()
@@ -58,7 +63,7 @@ class ProjectDetailView(DetailView):
 
         context['rating_form'] = RatingForm()
         context['review_form'] = ReviewForm()
-        
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -102,7 +107,7 @@ class ProjectCreateView(RoleRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.creator = self.request.user.profile
         return super().form_valid(form)
-    
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
@@ -121,7 +126,7 @@ class ProjectUpdateView(RoleRequiredMixin, UpdateView):
         project = form.save(commit=False)
         project.save()
         return redirect('diyprojects:project_detail', pk=project.pk)
-    
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user

@@ -21,7 +21,7 @@ class Project(models.Model):
         ('To-Do', 'To-Do'),
         ('Done', 'Done'),
     ]
-    
+
     title = models.CharField(max_length=255)
     category = models.ForeignKey(
         ProjectCategory,
@@ -54,7 +54,8 @@ class Project(models.Model):
 
 
 class Favorite(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="favorites")
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="favorites")
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_favorited = models.DateField(auto_now_add=True)
 
@@ -63,7 +64,8 @@ class Favorite(models.Model):
 
 
 class ProjectReview(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="reviews")
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="reviews")
     reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     comment = models.TextField()
     image = models.ImageField(upload_to='images/', null=True)
@@ -73,9 +75,11 @@ class ProjectReview(models.Model):
 
 
 class ProjectRating(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="ratings")
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="ratings")
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    score = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
 
     def __str__(self):
         return f"{self.score} - {self.project}"
