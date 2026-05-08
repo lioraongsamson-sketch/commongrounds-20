@@ -20,7 +20,6 @@ class ProfileRegisterView(CreateView):
     model = Profile
     form_class = ProfileRegisterForm
     template_name = "profile_register.html"
-    fields = "__all__"
     success_url = reverse_lazy("login")
 
     def form_valid(self, form):
