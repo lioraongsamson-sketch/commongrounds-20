@@ -12,4 +12,15 @@ class ProfileUpdateForm(forms.ModelForm):
 class ProfileRegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ['username', 'email', 'password']
+
+    role = forms.ChoiceField(
+        choices=[
+            ("None", "None"),
+            ("Market Seller", "Market Seller"),
+            ("Event Organizer", "Event Organizer"),
+            ("Book Contributor", "Book Contributor"),
+            ("Project Creator", "Project Creator"),
+            ("Commission Maker", "Commission Maker"),
+        ],
+    )
