@@ -2,6 +2,7 @@ from django.views.generic.edit import UpdateView, CreateView
 from .models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm, ProfileRegisterForm
+from django.urls import reverse_lazy
 
 
 
@@ -20,6 +21,7 @@ class ProfileRegisterView(CreateView):
     form_class = ProfileRegisterForm
     template_name = "profile_register.html"
     fields = "__all__"
+    success_url = reverse_lazy("login")
 
     def form_valid(self, form):
         form.instance.contributor = self.request.user.profile
