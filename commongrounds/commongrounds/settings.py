@@ -19,7 +19,7 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-CSRF_TRUSTED_ORIGINS = ["https://commongrounds-f-20.up.railway.app/"]
+CSRF_TRUSTED_ORIGINS = ["https://commongrounds-f-20.up.railway.app/",]
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,9 +32,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = [
-    "https://commongrounds-f-20-production.up.railway.app/",
-]
 
 # "commongrounds-f-20-production.up.railway.app"
 
