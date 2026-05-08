@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>Book Club</h3>
+    <h1 class="app_head">Book Club</h1>
 
     {% if user.is_authenticated %}
-    <a href="{% url 'bookclub:book_create' %}">Contribute a Book</a>
+    <a href="{% url 'bookclub:book_create' %}" class="detail">Contribute a Book</a>
 
-        <h4>Books Contributed</h4>
-        <ul>
+        <h2 class="subhead">Books Contributed</h2>
+        <ul class="items">
             {% for books in contributed_books %}
             <li>
                 <a href = "{{ books.get_absolute_url }}">
@@ -18,8 +18,8 @@
                 <p><i>No books contributed yet. Sharing is caring.</i></p>
             {% endfor %}
         </ul>
-    <h4>My Bookmarks</h4>
-    <ul>
+    <h2 class="subhead">Bookmarks</h2>
+    <ul class="items">
         {% for books in bookmarked_books %}
             <li>
                 <a href = "{{ books.get_absolute_url }}">
@@ -30,8 +30,8 @@
                 <p><i>No bookmarks yet. The brain is an unreliable archive.</i></p>
         {% endfor %}
     </ul>
-    <h4>My Reviews</h4>
-    <ul>
+    <h2 class="subhead">Books Reviewed</h2>
+    <ul class="items">
         {% for books in reviewed_books %}
             <li>
                 <a href = "{{ books.get_absolute_url }}">
@@ -44,8 +44,8 @@
     </ul>
     {% endif %} 
     
-    <h4>Bookshelf</h4>
-    <ul>
+    <h2 class="subhead">Bookshelf</h2>
+    <ul class="items">
         {% for books in all_books %}
             <li>
                 <a href = "{{ books.get_absolute_url }}">
