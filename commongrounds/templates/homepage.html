@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p class="welcome"> Welcome to Commongrounds, {{ user.profile.display_name }}! </p>
+    {% else %}
+        <p class="welcome"> Welcome to Commongrounds!</p>
+    {% endif %}
+    <div class="upper_half">
+        <a href="{% url 'merchstore:product_list' %}"> 
+            <figure>
+                <img class="brpics" src="../../static/images/chimpanzini.png" width="300">
+                <figcaption>Merchandise Store</figcaption>
+            </figure>
+        </a>
+        <a href="{% url 'localevents:event_list' %}">
+            <figure>
+                <img class="brpics" src="../../static/images/tungtungsahur.png" width="240">
+                <figcaption>Local Events</figcaption>
+            </figure></a>
+        <a href="{% url 'bookclub:book_list' %}">
+            <figure>
+                <img class="brpics" src="../../static/images/tralalero.png" width="300">
+                <figcaption>Book Club</figcaption>
+            </figure>
+        </a>
+    </div>
+    <div class="lower_half">
+        <a href="{% url 'diyprojects:project_list' %}">
+            <figure>
+                <img class="brpics" src="../../static/images/ballerina.png" width="350">
+                <figcaption>DIY Projects</figcaption>
+            </figure></a>
+        <a href="{% url 'commissions:request_list' %}">
+            <figure>
+                <img class="brpics" src="../../static/images/lirili.png" width="250">
+                <figcaption>Commission Requests</figcaption>
+            </figure></a>
+    </div>
+    
+    
+{% endblock %}

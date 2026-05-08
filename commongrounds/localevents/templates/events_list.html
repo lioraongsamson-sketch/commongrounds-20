@@ -1,14 +1,46 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h3>Local Events</h3>
-    <h5>Local Events List List</h5>
-    {% for event in event_list %}
-    <li>
-        <a href = "{{ event.get_absolute_url }}">
-            {{ event.title }}
-        </a>
-    </li>
+    <h1 class="app_head">Local Events</h1>
+    <h3 class="create"><a href="{% url 'localevents:event_create' %}">Create Event</a></h3>
 
-{% endfor %}
+    <br>
+
+    {% if user.is_authenticated %}
+        <h3 class="app_head">Events Created</h3>
+        <ul class="items">
+            {% for event in created_events %} 
+            <li>
+                <a href="{{ event.get_absolute_url }}">{{ event.title }} | {{ event.status }}</a>
+            </li>
+            {% empty %}
+                <li>You have not created any events.</li>
+            {% endfor %}
+        </ul>
+        <h3 class="app_head">Events Signed Up</h3>
+        <ul class="items">
+            {% for event in signed_up_events %} 
+            <li>
+                <a href="{{ event.get_absolute_url }}">{{ event.title }} | {{ event.status }}</a>
+            </li>
+            {% empty %}
+                <li>You have not signed up for any events.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <h3 class="app_head">Local Events List</h3>
+    {% for event in all_events %}
+    <ul class="items">
+        <li>
+            <a href = "{{ event.get_absolute_url }}">
+                {{ event.title }} | {{ event.status }}
+            </a>
+        </li>
+    </ul>
+    {% empty %}
+        <li>No events avaliable</li>
+    {% endfor %}
 {% endblock %}
+

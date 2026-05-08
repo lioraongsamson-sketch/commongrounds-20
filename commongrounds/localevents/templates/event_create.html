@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 class="app_head"><a href="{% url 'localevents:event_list' %}">Local Events</a></h1>
+    <h3 class="app_head">Create New Event</h3>
+
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" name="submit" value="Save Form">
+        </form>
+        <br>
+    </div>
+    <div class="detail">
+        <a class="side-button" href="{% url 'localevents:event_list' %}">Go Back</a>
+    </div>
+{% endblock %}
