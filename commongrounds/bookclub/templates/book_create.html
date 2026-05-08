@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="app_head">Got a book to share?</h1>
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" name="submit" value="Contribute" class="side-button">
+        </form>
+    </div>
+    <p class="detail">* Your username will be visible as the contributor.</p>
+
+    <a href="{% url 'bookclub:book_list' %}" class="detail">I don't</a>
+    
+{% endblock %}

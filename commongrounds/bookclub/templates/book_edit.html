@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="app_head">Update "{{ book.title }}"</h1>
+
+    <div class="form">
+        <form action="{% url 'bookclub:book_edit' book.pk %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" name="submit" class="side-button">Update</button>
+            <a href="{{ book.get_absolute.url }}" class="detail">Revert Changes</a>
+        </form>
+    </div>
+
+    <h2 class="subhead">Current Book Info</h2>
+    <ul class="items" >
+        <li>Title: {{ book.title }}</li>
+        <li>Genre: {{ book.genre }}</li>
+        <li>Author: {{ book.author }}</li>
+        <li>Synopsis: {{ book.synopsis }}</li>
+        <li>Year Published: {{ book.publication_year }}</li>
+        <li>Available to borrow? {{ book.available_to_borrow }}</li>
+    </ul>
+
+    <a href="{% url 'bookclub:book_detail' book.pk %}" class="detail">Keep As Is</a>
+
+{% endblock %}

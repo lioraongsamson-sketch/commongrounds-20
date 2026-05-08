@@ -1,10 +1,69 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h3>Book Club</h3>
-    <h3>{{ book.title }} ({{ book.publication_year }})</h3>
-    <h4>By {{ book.author }}</h4>
-    <p><b>Genre: </b>{{ book.genre }}</p>
-    <p>Shared on {{ book.created_on }}</p>
-    <p>Last updated on {{ book.updated_on }}</p>
+    <h1 class="app_head">Book Club</h1>
+    
+    <a href="{% url 'bookclub:book_list' %}" class="detail">Go Back</a>
+  
+    <h2 class="app_head">{{ book.title }} ({{ book.publication_year }})</h2>
+    <h2 class="detail">By {{ book.author }}</h2>
+    <p class="detail"><b>Genre: </b>{{ book.genre }}</p>
+    {% if is_contributor %}
+        <a href="{% url 'bookclub:book_edit' book.pk %}" class="detail">Update Book</a>
+    {% endif %}
+    <h4 class="detail">Synopsis</h4>
+    <p class="detail">{{ book.synopsis }}</p>
+    {% if book.available_to_borrow %}
+        <p class="detail"><i>Available for borrowing</i></p>
+    {% else %}
+        <p class="detail"><i>Not available for borrowing</i></p>
+    {% endif %}
+    
+    {% if book.available_to_borrow %}
+    <div class="detail">
+        <button type="button" class="side-button" class="side-button">
+            <a href="{% url 'bookclub:book_borrow' book.pk %}" class="detail">Borrow this book</a>
+        </button>
+    </div>
+    {% endif %}
+    
+    <p class="detail"><b>{% if bookmark_count == 0 %}No Bookmarks
+          {% elif bookmark_count == 1 %}{{ bookmark_count }} Bookmark
+          {% else %}{{ bookmark_count }} Bookmarks{% endif %}</b></p>
+    {% if user.is_authenticated %}
+        <form method="POST" class="detail">
+            <button type="submit" name="to_bookmark" value="bookmark" class="side-button">
+                {% csrf_token %}
+                {% if bookmarked %}Bookmarked
+                {% else %}Bookmark
+                {% endif %}
+            </button>
+        </form>
+        {% else %}
+        <button type="button" class="side-button"><a href="{% url 'login' %}">Log in to bookmark</a></button>
+    {% endif %}
+     
+
+    <p class="detail">Shared on {{ book.created_on }} by {{ book.contributor }}</p>
+    <p class="detail">Last updated on {{ book.updated_on }}</p>
+
+    <h3 class="subhead">Thoughts?</h3>
+    <div class="form">
+        <form method="POST">
+            {% csrf_token %}
+            {{ review }}
+            <input type="submit" name="submit" value="Leave a Review" class="side-button">
+        </form>
+    </div>
+    <h4 class="subhead">Other people have thoughts too...</h4>
+    <ul class="items">
+        {% for review in reviews %}
+            <li>
+                <p><b>{{ review.title }}:</b> {{ review.comment }} <i>- {{ review.user_reviewer|default:"Anonymous" }}</i></p>
+            </li>
+            {% empty %}
+            <p><i>or not... yet.</i></p>
+        {% endfor %}
+    </ul>
 {% endblock %}

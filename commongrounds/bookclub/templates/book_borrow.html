@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="app_head">Borrow "{{ book.title }}"</h1>
+
+    <h2 class="subhead">Book Info</h2>
+    <ul class="items">
+        <li><b>Title:</b> {{ book.title }}</li>
+        <li><b>Genre:</b> {{ book.genre }}</li>
+        <li><b>Author:</b> {{ book.author }}</li>
+        <li><b>Synopsis:</b> {{ book.synopsis }}</li>
+        <li><b>Year Published:</b> {{ book.publication_year }}</li>
+    </ul>
+
+    <div class="form">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" name="submit" class="side-button">Borrow</button>
+        </form>
+    </div>
+
+<a href="{% url 'bookclub:book_detail' book.pk %}" class="detail">I'm not borrowing</a>
+
+{% endblock %}
