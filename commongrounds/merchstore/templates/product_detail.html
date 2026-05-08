@@ -1,32 +1,43 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h3>Merchandise Store</h3>
-    <h3>{{ product.name }}</h3>
-    <img src="{{ product.product_image.url }}" width="200" height="200">
-    <p><b>Description</b></p>
-    <p>{{ product.description }}</p>
-    <p><b>Price:</b> {{ product.price }}</p>
-    <p><b>Stock:</b> {{ product.stock }}</p>
+    <h1 class="app_head">Merchandise Store</h1>
+    <h2 class="app_head">{{ product.name }}</h2>
+    <div class="detail">
+        {% if request.user.profile == product.owner %}
+            <a href="{% url 'merchstore:product_update' product.pk %}">Update Product</a>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
 
-    {% if request.user.profile == product.owner %}
-        <a href="{% url 'merchstore:product_update' product.pk %}">Update Product</a>
-    {% else %}
-        <form method="POST">
-            {% csrf_token %}
-            {{ form }}
-
-            <button type="submit" {% if product.stock == 0 %} disabled {% endif %}>
-                {% if product.stock == 0 %}
-                    Out of Stock
-                {% else %}
-                    Buy Now
-                {% endif %}
-            </button>
-        </form>
-    {% endif %}
+                <button type="submit" {% if product.stock == 0 %} disabled {% endif %} class="side-button">
+                    {% if product.stock == 0 %}
+                        Out of Stock
+                    {% else %}
+                        Buy Now
+                    {% endif %}
+                </button>
+            </form>
+        {% endif %}
+    </div>
 
     <br>
-    <a href="{% url 'merchstore:product_list' %}">Go Back</a>
+    <div style="text-align: center;">
+        <img src="{{ product.product_image.url }}" width="30%" height="30%">
+    </div>
+    <div style="text-align: center;">
+        <h2><b>Description</b></h2>
+        <p>{{ product.description }}</p>
+    </div>
+    <div class="detail">
+        <p><b>Price:</b> {{ product.price }}</p>
+        <p><b>Stock:</b> {{ product.stock }}</p>
+    </div>
+
+
+    <br>
+    <a href="{% url 'merchstore:product_list' %}" style="display: block; text-align: center;">Go Back</a>
 
 {% endblock %}
