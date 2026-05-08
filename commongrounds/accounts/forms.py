@@ -1,5 +1,6 @@
 from django import forms
 from .models import Profile
+from django.contrib.auth.models import User
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -10,5 +11,5 @@ class ProfileUpdateForm(forms.ModelForm):
 
 class ProfileRegisterForm(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = User
         fields = "__all__"
