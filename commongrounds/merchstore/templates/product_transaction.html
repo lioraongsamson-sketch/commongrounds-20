@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Your Transactions</h2>
+    <h1 class="app_head">Merchandise Store</h1>
+    <h2 class="app_head">Your Transactions</h2>
+
 {% regroup transactions by buyer as buyer_list %}
 {% for group in buyer_list %}
-    <h5>Buyer: {{ group.grouper }}</h5>
-    <ul>
-        {% for transaction in group.list %}
-        <li>
-            <b>{{ transaction.product.name }}</b>
+    <h4 class="app_head">Buyer: {{ group.grouper }}</h4>
+    <div style="display:flex; justify-content: center;">
+        <ul style="text-align: left;">
+            {% for transaction in group.list %}
+            <li>
+                <b>{{ transaction.product.name }}</b>
+                <br>
+                Amount: {{ transaction.amount }}
+                <br>
+                Status: {{ transaction.status }}
+                <br>
+                Purchased on: {{ transaction.created_on.date }}
+            </li>
             <br>
-            Amount: {{ transaction.amount }}
-            <br>
-            Status: {{ transaction.status }}
-            <br>
-            Purchased on: {{ transaction.created_on.date }}
-        </li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
+    </div>
 {% empty %}
     <p>Transactions are empty</p>
 {% endfor %}
 
 <br>
-<a href="{% url 'merchstore:product_list' %}">Go Back</a>
+<a href="{% url 'merchstore:product_list' %}" style="display: block; text-align: center;">Go Back</a>
 {% endblock %}
