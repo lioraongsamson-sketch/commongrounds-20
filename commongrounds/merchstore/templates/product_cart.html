@@ -1,26 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<h2>Your Cart</h2>
+    <h1 class="app_head">Merchandise Store</h1>
+    <h2 class="app_head">Your Cart</h2>
+
 {% regroup transactions by product.owner as owner_list %}
 {% for owner in owner_list %}
-    <h5>Seller: {{ owner.grouper.user.username }}</h5>
-    <ul>
-        {% for transaction in owner.list %}
-        <li>
-            <b>{{ transaction.product.name }}</b>
+    <h4 class="app_head">Seller: {{ owner.grouper.user.username }}</h4>
+    <div style="display:flex; justify-content: center;">
+        <ul style="text-align: left;">
+            {% for transaction in owner.list %}
+            <li>
+                <b>{{ transaction.product.name }}</b>
+                <br>
+                Amount: {{ transaction.amount }}
+                <br>
+                Status: {{ transaction.status }}
+            </li>
             <br>
-            Amount: {{ transaction.amount }}
-            <br>
-            Status: {{ transaction.status }}
-        </li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
+    </div>
 {% empty %}
-    <p>Cart is empty</p>
+    <p><b>Cart is empty</b></p>
 {% endfor %}
 
 <br>
-<a href="{% url 'merchstore:product_list' %}">Go Back</a>
+<a href="{% url 'merchstore:product_list' %}" style="display: block; text-align: center;">Go Back</a>
 
 {% endblock %}
