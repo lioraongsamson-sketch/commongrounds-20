@@ -22,7 +22,7 @@
         
         <h3 class="subhead">Applied Commissions</h3>
         {% for commission in applied_commissions %}
-            <ul class="list">
+            <ul class="items">
                 <li>
                     <a href="{{ commission.get_absolute_url }}"><b>{{ commission.title }}</b></a>
                     <p>{{ commission.status }}</p>
