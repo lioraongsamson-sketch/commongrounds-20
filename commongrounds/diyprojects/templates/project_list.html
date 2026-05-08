@@ -1,10 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
 {% block content %}
-    <h1>DIY Projects</h1>
-    <h3>Project List</h3>
-    {% for project in projects %}
-    <h4> {{category.name}} </h4>
-    <li>
-        <a href="{{ project.get_absolute_url }}"> {{ project.title }} </a>
-    </li>
-    {% endfor %}
+    <h1 class="app_head">DIY Projects</h1>
+    <p> <a class="create" href="{% url 'diyprojects:project_create' %}"> Create Project </a> </p>
+    {% if user.is_authenticated %}
+        <h3 class="subhead">Projects Created</h3>
+        <ul class="items">
+            {% for project in created_projects %}
+            <li>
+                <a href = "{{ project.get_absolute_url }}">
+                    {{ project.title }}
+                </a>
+            </li>
+            {% empty %}
+                <p><i>No projects created yet.</i></p>
+            {% endfor %}
+        </ul>
+
+    <h3 class="subhead">My Bookmarks</h3>
+    <ul class="items">
+        {% for project in favorited_projects %}
+            <li>
+                <a href = "{{ project.get_absolute_url }}">
+                    {{ project.title }}
+                </a>
+            </li>
+            {% empty %}
+                <p><i>No favorite projects yet.</i></p>
+        {% endfor %}
+    </ul>
+
+    <h3 class="subhead">My Reviews</h3>
+    <ul class="items">
+        {% for project in reviewed_projects %}
+            <li>
+                <a href = "{{ project.get_absolute_url }}">
+                    {{ project.title }}
+                </a>
+            </li>
+            {% empty %}
+                <p><i>No reviews yet.</i></p>
+        {% endfor %}
+    </ul>
+    {% endif %} 
+    
+    <h3 class="subhead">All Projects</h3>
+    <ul class="items">
+        {% for project in all_projects %}
+            <li>
+                <a href = "{{ project.get_absolute_url }}">
+                    {{ project.title }}
+                </a>
+            </li>
+            {% empty %}
+            <i>There are no other projects yet.</i>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -1,10 +1,53 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>Commission Requests</h1>
-    <h2>Commission Details</h2>
-    <p><b>Title: </b>{{ commission.title }}</p>
-    <p><b>Description: </b>{{ commission.description }}</p>
-    <p><b>People Required: </b>{{ commission.people_required }}</p>
-    <p><a href="/commissions/requests">Home</a></p>
+    <h1 class="app_head"><a href="/commissions/requests">Commission Requests</a></h1>
+    <h2 class="app_head">Commission Details</h2>
+    <div class="detail">
+        {% if commission.maker == request.user.profile %}
+            <a href="{% url 'commissions:request_update' commission.pk %}"><p>Edit commission</p></a>
+        {% endif%}
+    </div>
+    <div class="detail">
+        <p><b>Title: </b>{{ commission.title }}</p>
+        <p><b>Creator: </b>{{ commission.maker }}</p>
+        <p><b>Description: </b>{{ commission.description }}</p>
+        <p><b>People Required: </b>{{ commission.people_required }}</p>
+        <p><b>Total Manpower: </b> {{ total_manpower }}</p>
+        <p><b>Open Manpower: </b> {{ open_manpower }}</p>
+    </div>
+    
+    
+    <h2 class="app_head">Jobs</h2>
+    {% for job in commission.job.all %}
+        <ul class="list">
+            <li><b>{{ job.role }} [{{ job.status }}]</b>
+                <p>Manpower Required: {{ job.manpower_required }}</p>
+                <p>Accepted Applicants: {{ job.get_accepted_apps }}</p>
+            </li>
+            {% if user.is_authenticated %}
+                {% if commission.maker != request.user.profile %}
+                    <form method="POST" action="{% url 'commissions:request_detail' commission.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="job" value="{{ job.pk }}">
+                        <input type="hidden" name="applicant" value="{{ user.profile.pk }}">
+                        {% if job.is_full %}
+                            <button type="submit" disabled>Apply to Job</button>
+                        {% else %}
+                            <button type="submit">Apply to Job</button>
+                        {% endif %}
+                    </form>
+                {% endif %}
+            {% endif %}
+        </ul>
+    {% empty %}
+        <p>There are no listed jobs for this commission.</p>
+    {% endfor %}
+
+    
+
+    
+    
+
 {% endblock %}    

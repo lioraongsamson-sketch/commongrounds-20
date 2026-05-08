@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='role',
-            field=models.CharField(blank=True, choices=[('Market Seller', 'Market Seller'), ('Event Organizer', 'Event Organizer'), ('Book Contributor', 'Book Contributor'), ('Project Creator', 'Project Creator'), ('Commission Maker', 'Commission Maker')], max_length=50, null=True),
+            field=models.CharField(blank=True, choices=[('Market Seller', 'Market Seller'), ('Event Organizer', 'Event Organizer'), (
+                'Book Contributor', 'Book Contributor'), ('Project Creator', 'Project Creator'), ('Commission Maker', 'Commission Maker')], max_length=50, null=True),
         ),
     ]

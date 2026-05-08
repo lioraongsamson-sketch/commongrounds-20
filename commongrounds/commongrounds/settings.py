@@ -33,6 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["'commongrounds-f-20.up.railway.app'"]
 
+# "commongrounds-f-20-production.up.railway.app"
 
 # Application definition
 
@@ -136,5 +137,5 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
-
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

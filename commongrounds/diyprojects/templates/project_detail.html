@@ -1,10 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-    <h1>DIY Projects</h1>
-    <h3>{{ project.title }}</h3>
-    <p>{{ project.category }}</p>
-    <p>{{ project.description }}</p>
-    <p> Materials: </p>
-    <p>{{ project.materials }}</p>
-    <p> Steps: </p>
-    <p>{{ project.steps }}</p>
+    <h1 class="app_head"><a href="{% url 'diyprojects:project_list' %}">DIY Projects</a></h1>
+    <h2 class="app_head">Project Details</h2>
+    <div class="detail">
+        {% if project.creator == request.user.profile %}
+            <a href="{% url 'diyprojects:project_update' project.pk %}"><p>Edit Project</p></a>
+        {% endif%}
+    </div>
+    <div class="detail">
+        <p><b>Title: </b>{{ project.title }}</p>
+        <p><b>Creator: </b>{{ project.creator }}</p>
+        <p><b>Category: </b>{{ project.category }}</p>
+        <p><b>Description: </b>{{ project.description }}</p>
+        <p><b>Materials: </b>{{ project.materials }}</p>
+        <p><b>Steps: </b>{{ project.steps }}</p>
+        <p><b>Average Rating: </b>{{ average_rating|default:"No ratings yet" }}</p>
+        <p><b>Favorites: </b>{{ favorites_count }}</p>
+    </div>
+
+    <hr>
+
+    <div class="form">
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+
+        {% if user_has_favorited %}
+            <button disabled>Already Favorited</button>
+        {% else %}
+            <button type="submit" name="favorite">
+                Add to Favorites
+            </button>
+        {% endif %}
+    </form>
+    {% endif %}
+    </div>
+
+    <h2 class="app_head">Rate This Project!</h2>
+    <div class="form">
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ rating_form.as_p }}
+            <button type="submit" name="rate">Submit Rating</button>
+        </form>
+    {% endif %}
+    </div>
+
+    <hr>
+
+    <h2 class="app_head"> Reviews </h2>
+    <div>
+    {% for review in reviews %}
+        <p><strong>{{ review.reviewer }} says:</strong></p>
+        <p>{{ review.comment }}</p>
+
+        {% if review.image %}
+            <img src="{{ review.image.url }}" width="200">
+        {% endif %}
+        <hr>
+    {% endfor %}
+    </div>
+    
+
+    {% if user.is_authenticated %}
+    <h2 class="app_head">Add Review</h2>
+    <div class="form">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <button type="submit" name="review">Submit Review</button>
+    </form>
+    </div>
+    {% endif %}
 {% endblock %}
