@@ -19,9 +19,18 @@ class ProjectListView(ListView):
         if self.request.user.is_authenticated:
             profile = self.request.user.profile
 
-            context['created_projects'] = Project.objects.filter(creator=profile)
-            context['favorited_projects'] = Project.objects.filter(favorites__profile=profile)
-            context['reviewed_projects'] = Project.objects.filter(reviews__reviewer=profile)
+            creations = context['created_projects'] = Project.objects.filter(creator=profile)
+            favorites = context['favorited_projects'] = Project.objects.filter(favorites__profile=profile)
+            reviews = context['reviewed_projects'] = Project.objects.filter(reviews__reviewer=profile)
+
+            created = [project.pk for project in creations]
+            favorited = [project.pk for project in favorites]
+            reviewed = [project.pk for project in reviews]
+
+            user_projects = created + favorited + reviewed
+            context['all_projects'] = Project.objects.exclude(pk__in=user_projects)
+        else:
+            context['all_projects'] = Project.objects.all()
 
         return context
 

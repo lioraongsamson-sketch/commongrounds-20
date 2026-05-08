@@ -1,9 +1,10 @@
+from accounts.models import Profile
 from django import forms
 from .models import Project, ProjectReview, ProjectRating
 
 
 class ProjectForm(forms.ModelForm):
-    creator = forms.CharField()
+    creator = forms.ModelChoiceField(queryset=Profile.objects.all(), required=True)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
