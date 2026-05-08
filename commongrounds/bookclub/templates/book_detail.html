@@ -45,13 +45,15 @@
     <p class="detail">Last updated on {{ book.updated_on }}</p>
 
     <h3 class="subhead">Thoughts?</h3>
-    <form method="POST" class="form">
-        {% csrf_token %}
-        {{ review }}
-        <input type="submit" name="submit" value="Leave a Review" class="side-button">
-    </form>
+    <div class="form">
+        <form method="POST">
+            {% csrf_token %}
+            {{ review }}
+            <input type="submit" name="submit" value="Leave a Review" class="side-button">
+        </form>
+    </div>
     <h4 class="subhead">Other people have thoughts too...</h4>
-    <ul class="display:block">
+    <ul class="items">
         {% for review in reviews %}
             <li>
                 <p><b>{{ review.title }}:</b> {{ review.comment }} <i>- {{ review.user_reviewer|default:"Anonymous" }}</i></p>
