@@ -1,6 +1,6 @@
 from accounts.models import Profile
 from django import forms
-from .models import Project, ProjectReview, ProjectRating
+from .models import Favorite, Project, ProjectReview, ProjectRating
 
 
 class ProjectForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'category', 'creator',
-                  'description', 'materials', 'steps', 'status']
+                  'description', 'materials', 'steps']
 
 
 class ReviewForm(forms.ModelForm):

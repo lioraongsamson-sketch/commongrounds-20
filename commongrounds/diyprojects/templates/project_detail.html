@@ -19,6 +19,7 @@
         <p><b>Average Rating: </b>{{ average_rating|default:"No ratings yet" }}</p>
         <p><b>Favorites: </b>{{ favorites_count }}</p>
     </div>
+    </div>
 
     <hr>
 
@@ -26,14 +27,15 @@
     {% if user.is_authenticated %}
     <form method="post">
         {% csrf_token %}
-
-        {% if user_has_favorited %}
-            <button disabled>Already Favorited</button>
-        {% else %}
-            <button type="submit" name="favorite">
-                Add to Favorites
-            </button>
-        {% endif %}
+         {% if user_has_favorited %}
+        <button type="submit" name="favorite">
+            Remove from Favorites
+        </button>
+    {% else %}
+        <button type="submit" name="favorite">
+            Add to Favorites
+        </button>
+    {% endif %}
     </form>
     {% endif %}
     </div>

@@ -89,9 +89,12 @@ class ProjectDetailView(DetailView):
                 review.save()
 
         if 'favorite' in request.POST:
-            project.favorites.get_or_create(
-                profile=request.user.profile
+            favorite, created = project.favorites.get_or_create(
+            profile=request.user.profile
             )
+            
+            if not created:
+                favorite.delete()
 
         return redirect('diyprojects:project_detail', pk=project.pk)
 

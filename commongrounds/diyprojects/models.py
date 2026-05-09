@@ -16,12 +16,6 @@ class ProjectCategory(models.Model):
 
 
 class Project(models.Model):
-    STATUS_CHOICES = [
-        ('Backlog', 'Backlog'),
-        ('To-Do', 'To-Do'),
-        ('Done', 'Done'),
-    ]
-
     title = models.CharField(max_length=255)
     category = models.ForeignKey(
         ProjectCategory,
@@ -38,8 +32,6 @@ class Project(models.Model):
     materials = models.TextField()
     steps = models.TextField()
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True)
-
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -54,13 +46,20 @@ class Project(models.Model):
 
 
 class Favorite(models.Model):
+    STATUS_CHOICES = [
+        ('Backlog', 'Backlog'),
+        ('To-Do', 'To-Do'),
+        ('Done', 'Done'),
+    ]
+
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="favorites")
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, null=True,on_delete=models.CASCADE)
     date_favorited = models.DateField(auto_now_add=True)
+    project_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Backlog')
 
     def __str__(self):
-        return f"{self.profile} - {self.project}"
+        return f"{self.project_status} - {self.project}"
 
 
 class ProjectReview(models.Model):
