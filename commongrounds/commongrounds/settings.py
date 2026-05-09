@@ -29,7 +29,7 @@ CSRF_TRUSTED_ORIGINS = ["https://commongrounds-f-20.up.railway.app/",]
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [".railway.app"]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
