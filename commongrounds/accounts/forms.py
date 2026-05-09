@@ -18,6 +18,7 @@ class UserForm(UserCreationForm):
 
 class ProfileForm(forms.ModelForm):
     class Meta:
+        model = Profile
         role = forms.ChoiceField(
             choices=[
                 ("None", "None"),
