@@ -33,4 +33,4 @@ def register(request):
         uf = UserForm(prefix='user')
         upf = ProfileForm(prefix='userprofile')
         ctx = dict(userform=uf, userprofileform=upf)
-    return render('templates/profile_register.html', ctx)
+    return render('/templates/profile_register.html', ctx)
