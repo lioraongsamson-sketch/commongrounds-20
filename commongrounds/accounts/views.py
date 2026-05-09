@@ -32,6 +32,5 @@ def register(request):
     else:
         uf = UserForm(prefix='user')
         upf = ProfileForm(prefix='userprofile')
-    return render('profile_register.html',
-                              dict(userform=uf, userprofileform=upf),
-                              context_instance=RequestContext(request))
+        ctx = dict(userform=uf, userprofileform=upf)
+    return render('profile_register.html', ctx)
