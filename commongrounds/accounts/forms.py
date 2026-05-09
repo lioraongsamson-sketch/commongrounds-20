@@ -12,17 +12,17 @@ class ProfileUpdateForm(forms.ModelForm):
 
 class UserRegisterForm(UserCreationForm):
     display_name = forms.CharField(max_length=63)
-    email_address = forms.EmailField()
+    email = forms.EmailField()
     role = forms.ChoiceField(choices=Profile._meta.get_field("role").choices)
 
     class Meta:
         model = User
-        fields = ["username","display_name","email_address","role","password1","password2",]
+        fields = ["username","display_name","email","role","password1","password2",]
 
     def save(self, commit=True):
         user = super().save(commit=False)
 
-        user.email = self.cleaned_data["email_address"]
+        user.email = self.cleaned_data["email"]
 
         if commit:
             user.save()
@@ -30,7 +30,7 @@ class UserRegisterForm(UserCreationForm):
             Profile.objects.create(
                 user=user,
                 display_name=self.cleaned_data["display_name"],
-                email_address=self.cleaned_data["email_address"],
+                email=self.cleaned_data["email"],
                 role=self.cleaned_data["role"],
             )
 
