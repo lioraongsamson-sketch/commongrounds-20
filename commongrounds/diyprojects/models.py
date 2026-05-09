@@ -78,7 +78,7 @@ class ProjectRating(models.Model):
         Project, on_delete=models.CASCADE, related_name="ratings")
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     score = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(10)])
+        validators=[MinValueValidator(1), MaxValueValidator(10)], null=True)
 
     def __str__(self):
         return f"{self.score} - {self.project}"

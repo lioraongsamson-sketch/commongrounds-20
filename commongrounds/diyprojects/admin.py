@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Project, ProjectCategory, Favorite, ProjectReview
+from .models import Project, ProjectCategory, Favorite, ProjectReview, ProjectRating
 
 
 class ProjectCategoryInLine(admin.TabularInline):
@@ -21,8 +21,12 @@ class FavoriteAdmin(admin.ModelAdmin):
 class ProjectReviewAdmin(admin.ModelAdmin):
     model = ProjectReview
 
+class ProjectRatingAdmin(admin.ModelAdmin):
+    model = ProjectRating
+
 
 admin.site.register(ProjectCategory, ProjectCategoryAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(ProjectReview, ProjectReviewAdmin)
+admin.site.register(ProjectRating, ProjectRatingAdmin)

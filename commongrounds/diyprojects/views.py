@@ -75,10 +75,14 @@ class ProjectDetailView(DetailView):
         if 'rate' in request.POST:
             form = RatingForm(request.POST)
             if form.is_valid():
-                rating = form.save(commit=False)
-                rating.project = project
-                rating.profile = request.user.profile
-                rating.save()
+                score = form.cleaned_data['score']
+                rating, created = ProjectRating.objects.get_or_create(
+                    project=project,
+                    profile=request.user.profile,
+                )
+                if not created:
+                    rating.score = score
+                    rating.save()
 
         if 'review' in request.POST:
             form = ReviewForm(request.POST, request.FILES)
@@ -92,7 +96,6 @@ class ProjectDetailView(DetailView):
             favorite, created = project.favorites.get_or_create(
             profile=request.user.profile
             )
-            
             if not created:
                 favorite.delete()
 
