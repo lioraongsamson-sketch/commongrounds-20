@@ -29,3 +29,4 @@ class ProfileForm(forms.ModelForm):
                 ("Commission Maker", "Commission Maker"),
             ],
         )
+        fields = ['role']
