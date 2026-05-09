@@ -10,18 +10,21 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['display_name']
 
 
-class ProfileRegisterForm(UserCreationForm):
+class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-    role = forms.ChoiceField(
-        choices=[
-            ("None", "None"),
-            ("Market Seller", "Market Seller"),
-            ("Event Organizer", "Event Organizer"),
-            ("Book Contributor", "Book Contributor"),
-            ("Project Creator", "Project Creator"),
-            ("Commission Maker", "Commission Maker"),
-        ],
-    )
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        role = forms.ChoiceField(
+            choices=[
+                ("None", "None"),
+                ("Market Seller", "Market Seller"),
+                ("Event Organizer", "Event Organizer"),
+                ("Book Contributor", "Book Contributor"),
+                ("Project Creator", "Project Creator"),
+                ("Commission Maker", "Commission Maker"),
+            ],
+        )

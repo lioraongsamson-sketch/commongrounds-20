@@ -6,7 +6,8 @@
 <div class="login">
     <form method="post" action=""> 
         {% csrf_token %} 
-        {{ form.as_p }} 
+        {{ userform.as_p }} 
+        {{ userprofileform.as_p }}
         <input type="submit" value="Save"> 
     </form>
 </div>

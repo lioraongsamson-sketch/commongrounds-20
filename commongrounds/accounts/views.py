@@ -1,9 +1,11 @@
 from django.views.generic.edit import UpdateView, CreateView
 from .models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import ProfileUpdateForm, ProfileRegisterForm
+from .forms import ProfileUpdateForm, UserForm, ProfileForm
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from django.shortcuts import render_to_response, redirect
+from django.template import RequestContext
 
 
 
@@ -17,12 +19,19 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.user.profile
 
     
-class ProfileRegisterView(CreateView):
-    model = User
-    form_class = ProfileRegisterForm
-    template_name = "profile_register.html"
-    success_url = reverse_lazy("login")
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user.profile
-        return super().form_valid(form)
+def register(request):
+    if request.method == 'POST':
+        uf = UserForm(request.POST, prefix='user')
+        upf = ProfileForm(request.POST, prefix='userprofile')
+        if uf.is_valid() * upf.is_valid():
+            user = uf.save()
+            userprofile = upf.save(commit=False)
+            userprofile.user = user
+            userprofile.save()
+            return redirect("/")
+    else:
+        uf = UserForm(prefix='user')
+        upf = ProfileForm(prefix='userprofile')
+    return render_to_response('profile_register.html',
+                              dict(userform=uf, userprofileform=upf),
+                              context_instance=RequestContext(request))
