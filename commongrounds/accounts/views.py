@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm, UserForm, ProfileForm
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.template import RequestContext
 
 
@@ -32,6 +32,6 @@ def register(request):
     else:
         uf = UserForm(prefix='user')
         upf = ProfileForm(prefix='userprofile')
-    return render_to_response('profile_register.html',
+    return render('profile_register.html',
                               dict(userform=uf, userprofileform=upf),
                               context_instance=RequestContext(request))
