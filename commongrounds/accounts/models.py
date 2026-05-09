@@ -2,13 +2,13 @@ from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import User
 
-USER_ROLES = {
-    "Market Seller": "Market Seller",
-    "Event Organizer": "Event Organizer",
-    "Book Contributor": "Book Contributor",
-    "Project Creator": "Project Creator",
-    "Commission Maker": "Commission Maker",
-}
+USER_ROLES = [
+    ("Market Seller", "Market Seller"),
+    ("Event Organizer", "Event Organizer"),
+    ("Book Contributor", "Book Contributor"),
+    ("Project Creator", "Project Creator"),
+    ("Commission Maker", "Commission Maker"),
+]
 
 
 class Profile(models.Model):
