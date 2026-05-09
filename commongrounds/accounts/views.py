@@ -2,10 +2,6 @@ from django.views.generic.edit import UpdateView, CreateView
 from .models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm, UserRegisterForm
-from django.contrib.auth.models import User
-from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
-from django.template import RequestContext
 
 
 
