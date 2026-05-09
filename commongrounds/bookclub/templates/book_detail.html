@@ -41,7 +41,11 @@
             </button>
         </form>
         {% else %}
-        <button type="button" class="side-button"><a href="{% url 'login' %}">Log in to bookmark</a></button>
+        <div class="detail">
+            <button type="button" class="side-button">
+                <a href="{% url 'login' %}">Log in to bookmark</a>
+            </button>
+        </div>
     {% endif %}
      
 
